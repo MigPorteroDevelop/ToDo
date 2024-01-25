@@ -1,4 +1,30 @@
 <script>
+const component = {
+  data() {
+    return{
+      todoTitle: "",
+      todos: [],
+    }
+  },
+
+  methods:{
+    updateTitle(e) {
+      this.todoTitle = e.target.value
+      console.log(this.todoTitle)
+    },
+    addToDo(e){
+      e.preventDefault();
+      this.todos.push(this.todoTitle);
+      console.log(this.todos);
+      this.todoTitle = "";
+    },
+    removeToDo(i){
+      this.todos.splice(i, 1)
+    }
+  }
+}
+
+export default component;
 </script>
 
 <template>
@@ -9,20 +35,20 @@
 
   <main class="container">
     <section>
-      <form class="addToDo">
-        <input type="text" placeholder="ToDo Title">
+      <form class="addTodoForm">
+        <input @input="updateTitle" v-model="todoTitle" type="text" placeholder="ToDo Title">
         <div>
-          <button>Add ToDo</button>
+          <button type="button" @click.prevent="addToDo">Add ToDo</button>
         </div>
       </form>
     </section>
 
     <section>
-      <div class="todo">
-        <p>Study</p>
+      <div v-for="(todo, i) in todos" class="todo">
+        <p>{{ todo }}</p>
         <div>
-          <button class="removeTodo">&times;</button>
-          <button></button>
+          <button class="editTodo">&#9998;</button>
+          <button type="button" @click="removeToDo(i)" class="removeTodo">&cross;</button>
         </div>
       </div>
     </section>
@@ -42,17 +68,17 @@
   font-size: 2rem;
 }
 
-.addToDo{
+.addTodoForm{
   display: flex;
   justify-content: space-between;
 }
 
-.addToDo input{
+.addTodoForm input{
   width: 80%;
   border: solid 2px var(--accent-color);
 }
 
-.addToDo button{
+.addTodoForm button{
   background: var(--accent-color);
   color: var(--text-color);
   border: none;
@@ -77,5 +103,15 @@
   font-size: 30px;
   color: var(--text-color);
   background: var(--danger-color);
+}
+
+.editTodo{
+  border-radius: 50%;
+  border: none;
+  height: 40px;
+  width: 40px;
+  font-size: 30px;
+  color: var(--text-color);
+  background: var(--accent-color);
 }
 </style>
