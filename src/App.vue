@@ -1,25 +1,26 @@
 <script>
 const component = {
   data() {
-    return{
+    return {
       todoTitle: "",
       todos: [],
     }
   },
 
-  methods:{
+  methods: {
     updateTitle(e) {
       this.todoTitle = e.target.value
-      console.log(this.todoTitle)
     },
-    addToDo(e){
-      e.preventDefault();
-      this.todos.push(this.todoTitle);
-      console.log(this.todos);
-      this.todoTitle = "";
+    addToDo(e) {
+      if (this.todoTitle !== "") {
+        this.todos.push(this.todoTitle);
+        this.todoTitle = "";
+      } else {
+        return false
+      }
     },
-    removeToDo(i){
-      this.todos.splice(i, 1)
+    removeToDo(todo, i) {
+      this.todos = this.todos.filter(t => t !== todo);
     }
   }
 }
@@ -44,11 +45,11 @@ export default component;
     </section>
 
     <section>
-      <div v-for="(todo, i) in todos" class="todo">
+      <div v-for="todo in todos" class="todo">
         <p>{{ todo }}</p>
         <div>
           <button class="editTodo">&#9998;</button>
-          <button type="button" @click="removeToDo(i)" class="removeTodo">&cross;</button>
+          <button type="button" @click="removeToDo(todo)" class="removeTodo">&cross;</button>
         </div>
       </div>
     </section>
@@ -56,7 +57,7 @@ export default component;
 </template>
 
 <style scoped>
-.navbar{
+.navbar {
   display: flex;
   align-items: center;
   background: var(--navbar-color);
@@ -64,28 +65,28 @@ export default component;
   margin-bottom: 30px;
 }
 
-.brand{
+.brand {
   font-size: 2rem;
 }
 
-.addTodoForm{
+.addTodoForm {
   display: flex;
   justify-content: space-between;
 }
 
-.addTodoForm input{
+.addTodoForm input {
   width: 80%;
   border: solid 2px var(--accent-color);
 }
 
-.addTodoForm button{
+.addTodoForm button {
   background: var(--accent-color);
   color: var(--text-color);
   border: none;
   height: 50px;
 }
 
-.todo{
+.todo {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -95,7 +96,7 @@ export default component;
   border-radius: 10px;
 }
 
-.removeTodo{
+.removeTodo {
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -105,7 +106,7 @@ export default component;
   background: var(--danger-color);
 }
 
-.editTodo{
+.editTodo {
   border-radius: 50%;
   border: none;
   height: 40px;
