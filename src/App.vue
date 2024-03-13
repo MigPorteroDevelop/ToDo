@@ -1,9 +1,15 @@
 <script>
-const component = {
+import Alert from './components/Alert.vue';
+
+export default {
+  components: {
+    Alert,
+  },
   data() {
     return {
       todoTitle: "",
       todos: [],
+      showAlert: false
     }
   },
 
@@ -12,6 +18,11 @@ const component = {
       this.todoTitle = e.target.value
     },
     addToDo(e) {
+      if (this.todoTitle === "") {
+        this.showAlert = true;
+        return;
+      }
+
       if (this.todoTitle !== "") {
         this.todos.push(this.todoTitle);
         this.todoTitle = "";
@@ -25,7 +36,6 @@ const component = {
   }
 }
 
-export default component;
 </script>
 
 <template>
@@ -35,6 +45,7 @@ export default component;
   </nav>
 
   <main class="container">
+  <Alert :show="showAlert" @close="showAlert = false" />
     <section>
       <form class="addTodoForm">
         <input @input="updateTitle" v-model="todoTitle" type="text" placeholder="ToDo Title">
@@ -104,6 +115,7 @@ export default component;
   font-size: 30px;
   color: var(--text-color);
   background: var(--danger-color);
+  cursor: pointer;
 }
 
 .editTodo {
