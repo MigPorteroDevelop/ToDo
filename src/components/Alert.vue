@@ -1,10 +1,37 @@
 <script>
 
 export default {
-  props: ['show'],
+  props: {
+    message: {
+      required: true,
+      type: String,
+    },
+    show: {
+      required: true,
+      type: Boolean,
+    },
+    type: {
+      required: false,
+      default: "danger",
+      validator(value) {
+        return ["danger", "warning", "info"].includes(value);
+      }
+    }
+  },
+
+  computed: {
+    backgroundColor() {
+      const options = {
+        danger: "var(--danger-color)",
+        info: "var(--info-color)",
+        warning: "var(--warning-color)",
+      }
+      return options[this.type];
+    }
+  },
   emits: ['close'],
-  methods:{
-    closeAlert(){
+  methods: {
+    closeAlert() {
       this.$emit('close');
     }
   }
@@ -12,11 +39,12 @@ export default {
 </script>
 
 <template>
-  <div class="alert" v-if="show">
-    <div>ToDo title is required</div>
+  <div class="alert" v-if="show" :style="{ backgroundColor }">
+    ToDo title is required
     <div @click="closeAlert" class="close-alert">&times;</div>
   </div>
 </template>
+
 
 <style scoped>
 .alert {

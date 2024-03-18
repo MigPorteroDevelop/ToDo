@@ -45,7 +45,7 @@ export default {
   </nav>
 
   <main class="container">
-  <Alert :show="showAlert" @close="showAlert = false" />
+    <Alert :show="showAlert" @close="showAlert = false" type="warning"/>
     <section>
       <form class="addTodoForm">
         <input @input="updateTitle" v-model="todoTitle" type="text" placeholder="ToDo Title">
