@@ -1,9 +1,13 @@
 <script>
 import Alert from './components/Alert.vue';
+import Navbar from './components/Navbar.vue';
+import AddTodoForm from './components/AddTodoForm.vue';
 
 export default {
   components: {
     Alert,
+    Navbar,
+    AddTodoForm
   },
   data() {
     return {
@@ -17,15 +21,15 @@ export default {
     updateTitle(e) {
       this.todoTitle = e.target.value
     },
-    addToDo(e) {
-      if (this.todoTitle === "") {
+    addToDo(title) {
+      if (title === "") {
         this.showAlert = true;
         return;
       }
 
-      if (this.todoTitle !== "") {
-        this.todos.push(this.todoTitle);
-        this.todoTitle = "";
+      if (title !== "") {
+        this.todos.push(title);
+        title = "";
       } else {
         return false
       }
@@ -39,22 +43,13 @@ export default {
 </script>
 
 <template>
-  <nav class="navbar">
-    <img src="./assets/logo.svg" width="80">
-    <div class="brand">ToDo App</div>
-  </nav>
-
+  <Navbar />
   <main class="container">
-    <Alert :show="showAlert" @close="showAlert = false" type="warning"/>
+    <Alert :show="showAlert" @close="showAlert = false" type="warning" />
     <section>
-      <form class="addTodoForm">
-        <input @input="updateTitle" v-model="todoTitle" type="text" placeholder="ToDo Title">
-        <div>
-          <button type="button" @click.prevent="addToDo">Add ToDo</button>
-        </div>
-      </form>
+      <!--From AddTodoForm is emited one event with params, to this function-->
+      <AddTodoForm @submit="addToDo" />
     </section>
-
     <section>
       <div v-for="todo in todos" class="todo">
         <p>{{ todo }}</p>
@@ -68,35 +63,6 @@ export default {
 </template>
 
 <style scoped>
-.navbar {
-  display: flex;
-  align-items: center;
-  background: var(--navbar-color);
-  padding: 20px;
-  margin-bottom: 30px;
-}
-
-.brand {
-  font-size: 2rem;
-}
-
-.addTodoForm {
-  display: flex;
-  justify-content: space-between;
-}
-
-.addTodoForm input {
-  width: 80%;
-  border: solid 2px var(--accent-color);
-}
-
-.addTodoForm button {
-  background: var(--accent-color);
-  color: var(--text-color);
-  border: none;
-  height: 50px;
-}
-
 .todo {
   display: flex;
   justify-content: space-between;
