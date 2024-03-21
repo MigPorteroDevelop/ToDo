@@ -2,12 +2,14 @@
 import Alert from './components/Alert.vue';
 import Navbar from './components/Navbar.vue';
 import AddTodoForm from './components/AddTodoForm.vue';
+import TodoItem from './components/TodoItem.vue';
 
 export default {
   components: {
     Alert,
     Navbar,
-    AddTodoForm
+    AddTodoForm,
+    TodoItem
   },
   data() {
     return {
@@ -55,13 +57,7 @@ export default {
       <AddTodoForm @submit="addToDo" />
     </section>
     <section>
-      <div v-for="todo in todos" :key="todo.id" class="todo">
-        <p>{{ todo.title }}</p>
-        <div>
-          <button class="editTodo">&#9998;</button>
-          <button type="button" @click="removeToDo(todo.id)" class="removeTodo">&cross;</button>
-        </div>
-      </div>
+      <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" :removeToDo="removeToDo" />
     </section>
   </main>
 </template>
