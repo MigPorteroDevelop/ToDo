@@ -28,14 +28,18 @@ export default {
       }
 
       if (title !== "") {
-        this.todos.push(title);
-        title = "";
+        const todoItem = {
+          id: Math.floor(Math.random() * 1000),
+          title: title
+        };
+        this.todos.push(todoItem);
+        this.todoTitle = "";
       } else {
         return false
       }
     },
-    removeToDo(todo, i) {
-      this.todos = this.todos.filter(t => t !== todo);
+    removeToDo(todoId) {
+      this.todos = this.todos.filter(todo => todo.id !== todoId);
     }
   }
 }
@@ -51,11 +55,11 @@ export default {
       <AddTodoForm @submit="addToDo" />
     </section>
     <section>
-      <div v-for="todo in todos" class="todo">
-        <p>{{ todo }}</p>
+      <div v-for="todo in todos" :key="todo.id" class="todo">
+        <p>{{ todo.title }}</p>
         <div>
           <button class="editTodo">&#9998;</button>
-          <button type="button" @click="removeToDo(todo)" class="removeTodo">&cross;</button>
+          <button type="button" @click="removeToDo(todo.id)" class="removeTodo">&cross;</button>
         </div>
       </div>
     </section>
