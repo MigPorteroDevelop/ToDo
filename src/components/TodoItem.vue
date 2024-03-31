@@ -1,6 +1,9 @@
 <script setup>
 import { todos } from '../store/store'
 
+const removeTodo = (index) => {
+  todos.value.splice(index, 1);
+}
 </script>
 
 <template>
@@ -8,7 +11,7 @@ import { todos } from '../store/store'
     <p>{{ todo.title }}</p>
     <div>
       <button class="editTodo">&#9998;</button>
-      <button type="button" class="removeTodo">&cross;</button>
+      <button type="button" class="removeTodo" @click="removeTodo(index)">&cross;</button>
     </div>
   </div>
 </template>
