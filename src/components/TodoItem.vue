@@ -1,9 +1,11 @@
 <script setup>
+import { todos } from '../store/store'
+
 </script>
 
 <template>
-  <div class="todo">
-    <!--<p>{{ todo.title }}</p>-->
+  <div class="todo" v-for="(todo, index) in todos" :key="index">
+    <p>{{ todo.title }}</p>
     <div>
       <button class="editTodo">&#9998;</button>
       <button type="button" class="removeTodo">&cross;</button>

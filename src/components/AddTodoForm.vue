@@ -13,13 +13,16 @@ const addToDoTitle = () => {
     id: uniqueId(),
     title: todoTitle.value
   }
-  todos.value.push(newTodo);
-  todoTitle.value = "";
+  if (todoTitle.value !== "") {
+    todos.value.push(newTodo);
+    todoTitle.value = "";
+  } else {
+    return false
+  }
 }
 </script>
 
 <template>
-  {{ todos }}
   <section>
     <form class="addTodoForm">
       <input type="text" v-model="todoTitle" placeholder="ToDo Title">
