@@ -1,7 +1,7 @@
 <script setup>
+import { todos } from '../store/store'
 import { ref } from 'vue';
 
-const todos = ref([]);
 const todoTitle = ref("");
 
 const uniqueId = () => {

@@ -9,10 +9,9 @@ import TodoItem from './components/TodoItem.vue';
   <Navbar />
   <main class="container">
     <Alert />
-
     <section>
       <!--From AddTodoForm is emited one event with params, to this function-->
-      <AddTodoForm @submit="addToDo" />
+      <AddTodoForm />
     </section>
     <section>
       <TodoItem />
