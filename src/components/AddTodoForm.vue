@@ -1,20 +1,12 @@
-<script>
-export default {
-  data() {
-    return {
-      todoTitle: "",
-    }
-  },
-  emits: ['submit']
-}
+<script setup>
 </script>
 
 <template>
   <section>
     <form class="addTodoForm">
-      <input @input="updateTitle" v-model="todoTitle" type="text" placeholder="ToDo Title">
+      <input type="text" placeholder="ToDo Title">
       <div>
-        <button type="button" @click.prevent="~$emit('submit', todoTitle)">Add ToDo</button>
+        <button type="button">Add ToDo</button>
       </div>
     </form>
   </section>

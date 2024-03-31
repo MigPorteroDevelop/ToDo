@@ -1,15 +1,12 @@
 <script>
-export default {
-  props: ['todo', 'removeToDo']
-}
 </script>
 
 <template>
   <div class="todo">
-    <p>{{ todo.title }}</p>
+    <!--<p>{{ todo.title }}</p>-->
     <div>
       <button class="editTodo">&#9998;</button>
-      <button type="button" @click="removeToDo(todo.id)" class="removeTodo">&cross;</button>
+      <button type="button" class="removeTodo">&cross;</button>
     </div>
   </div>
 </template>

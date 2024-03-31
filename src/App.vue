@@ -1,63 +1,42 @@
-<script>
+<script setup>
 import Alert from './components/Alert.vue';
 import Navbar from './components/Navbar.vue';
 import AddTodoForm from './components/AddTodoForm.vue';
 import TodoItem from './components/TodoItem.vue';
+import { ref } from 'vue';
 
-export default {
-  components: {
-    Alert,
-    Navbar,
-    AddTodoForm,
-    TodoItem
-  },
-  data() {
-    return {
-      todoTitle: "",
-      todos: [],
-      showAlert: false
-    }
-  },
+const todos = ref([]);
+const todoTitle = ref("");
 
-  methods: {
-    updateTitle(e) {
-      this.todoTitle = e.target.value
-    },
-    addToDo(title) {
-      if (title === "") {
-        this.showAlert = true;
-        return;
-      }
+const uniqueId = () => {
+  return Math.random().toString(36).substr(2, 9);
+};
 
-      if (title !== "") {
-        const todoItem = {
-          id: Math.floor(Math.random() * 1000),
-          title: title
-        };
-        this.todos.push(todoItem);
-        this.todoTitle = "";
-      } else {
-        return false
-      }
-    },
-    removeToDo(todoId) {
-      this.todos = this.todos.filter(todo => todo.id !== todoId);
-    }
+const addToDoTitle = () => {
+  const newTodo = {
+    id: uniqueId(),
+    title: todoTitle.value
   }
+  todos.value.push(newTodo);
+  todoTitle.value = "";
 }
-
 </script>
 
 <template>
   <Navbar />
   <main class="container">
-    <Alert :show="showAlert" @close="showAlert = false" type="warning" />
+    <Alert />
+    {{ todos }}
+    
+    <input type="text" v-model="todoTitle">
+    <button @click="addToDoTitle">Add ToDo</button>
+
     <section>
       <!--From AddTodoForm is emited one event with params, to this function-->
       <AddTodoForm @submit="addToDo" />
     </section>
     <section>
-      <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" :removeToDo="removeToDo" />
+      <TodoItem />
     </section>
   </main>
 </template>
