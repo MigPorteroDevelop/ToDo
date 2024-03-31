@@ -1,12 +1,30 @@
 <script setup>
+import { ref } from 'vue';
+
+const todos = ref([]);
+const todoTitle = ref("");
+
+const uniqueId = () => {
+  return Math.random().toString(36).substr(2, 9);
+};
+
+const addToDoTitle = () => {
+  const newTodo = {
+    id: uniqueId(),
+    title: todoTitle.value
+  }
+  todos.value.push(newTodo);
+  todoTitle.value = "";
+}
 </script>
 
 <template>
+  {{ todos }}
   <section>
     <form class="addTodoForm">
-      <input type="text" placeholder="ToDo Title">
+      <input type="text" v-model="todoTitle" placeholder="ToDo Title">
       <div>
-        <button type="button">Add ToDo</button>
+        <button type="button" @click="addToDoTitle">Add ToDo</button>
       </div>
     </form>
   </section>
