@@ -54,5 +54,6 @@ const addToDoTitle = () => {
   color: var(--text-color);
   border: none;
   height: 50px;
+  cursor: pointer;
 }
 </style>
