@@ -1,5 +1,4 @@
 <script setup>
-import Alert from './components/Alert.vue';
 import Navbar from './components/Navbar.vue';
 import AddTodoForm from './components/AddTodoForm.vue';
 import TodoItem from './components/TodoItem.vue';
@@ -8,7 +7,6 @@ import TodoItem from './components/TodoItem.vue';
 <template>
   <Navbar />
   <main class="container">
-    <Alert />
     <section>
       <AddTodoForm />
     </section>
