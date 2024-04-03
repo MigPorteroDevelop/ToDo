@@ -51,9 +51,25 @@ const addToDoTitle = () => {
 
 .addTodoForm button {
   background: var(--accent-color);
-  color: var(--text-color);
-  border: none;
+  color: #FFF;
   height: 50px;
+  border: 2px solid var(--text-color);
+  border-radius: 10px;
+  padding: 18px 36px;
+  display: inline-block;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  box-shadow: inset 0 0 0 0 #ffffff;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
   cursor: pointer;
+}
+
+.addTodoForm button:hover {
+  box-shadow: inset 0 0 0 50px #ffffff;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
 }
 </style>

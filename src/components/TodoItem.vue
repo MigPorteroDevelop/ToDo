@@ -23,14 +23,15 @@ const removeTodo = (index) => {
 <template>
   <div class="todo" v-for="(todo, index) in todos" :key="index">
     <p v-if="!todo.editing">{{ todo.title }}</p>
-    <input v-else v-model="todo.newTitle" type="text"></input>
-    <div>
+    <input class="inputEdit" v-else v-model="todo.newTitle" type="text"></input>
+    <div class="todoItem">
       <button type="button" class="editTodo" @click="editTodo(index)">&#9998;</button>
       <button type="button" class="applyEdit" v-if="todo.editing" @click="applyEdit(index)">&#x2713;</button>
       <button type="button" class="removeTodo" @click="removeTodo(index)">&cross;</button>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .todo {
@@ -40,7 +41,11 @@ const removeTodo = (index) => {
   background: var(--accent-color);
   margin-top: 30px;
   padding: 0 20px 0 20px;
-  border-radius: 10px;
+  border-radius: 10px
+}
+
+.todoItem button{
+  margin-left: 5px;
 }
 
 .removeTodo {
@@ -74,5 +79,14 @@ const removeTodo = (index) => {
   color: var(--text-color);
   background: var(--accent-color);
   cursor: pointer;
+}
+
+.inputEdit {
+  border-radius: 100px;
+  border-color: white;
+  height: 20px;
+  width: 25%;
+  font-size: 10px;
+  color: black;
 }
 </style>
