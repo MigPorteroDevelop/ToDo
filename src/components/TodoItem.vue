@@ -2,17 +2,17 @@
 import { todos } from '../store/store'
 
 const editTodo = (index, title) => {
-  //Añado una propiedad "editing", para rastrear que se está modificando
+  //Added an "editing" property, to track that it is being modified
   todos.value[index].editing = true;
-  //Al entrar en modo "editing", le podemos asignar un nuevo título temporalmente.
+  //Allowing the "editing" mode, we can assign a new title temporarily.
   todos.value[index].newTitle = title;
 };
 
 const applyEdit = (index) => {
-  // Actualiza el título
-  todos.value[index].title = todos.value[index].newTitle; 
-  // Sale del modo edición
-  todos.value[index].editing = false; 
+  // Update title
+  todos.value[index].title = todos.value[index].newTitle;
+  // Exits edit mode
+  todos.value[index].editing = false;
 };
 
 const removeTodo = (index) => {
@@ -44,7 +44,7 @@ const removeTodo = (index) => {
   border-radius: 10px
 }
 
-.todoItem button{
+.todoItem button {
   margin-left: 5px;
 }
 

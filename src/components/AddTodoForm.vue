@@ -3,6 +3,17 @@ import { todos } from '../store/store'
 import { ref } from 'vue';
 import Alert from './Alert.vue';
 
+//Disable "enter"
+window.addEventListener('keydown', function (e) {
+  if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
+    if (e.target.nodeName == 'INPUT' && e.target.type == 'text') {
+      e.preventDefault();
+
+      return false;
+    }
+  }
+}, true);
+
 const todoTitle = ref("");
 const showAlert = ref(false);
 
@@ -18,7 +29,8 @@ const addToDoTitle = () => {
   if (todoTitle.value !== "") {
     todos.value.push(newTodo);
     todoTitle.value = "";
-    //Resetea el estado
+
+    //Reset status
     showAlert.value = false;
   } else {
     showAlert.value = true;
